@@ -5,7 +5,7 @@ public class SEng extends HonoursDegree{
   private static ArrayList<Course> requiredCourses = new ArrayList<Course>();
 
   public SEng(){
-
+    setDegreeTitle("SEng");
   }
 
   ArrayList<Course> remainingRequiredCourses(PlanOfStudy thePlan){

@@ -5,7 +5,7 @@ public class BCG extends GeneralDegree{
   private static ArrayList<Course> requiredCourses = new ArrayList<Course>();
 
   public BCG(){
-
+    setDegreeTitle("BCG");
   }
 
   public boolean meetsRequirements(PlanOfStudy thePlan){

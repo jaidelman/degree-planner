@@ -86,7 +86,7 @@ public class CourseCatalog{
     String toWrite = "";
 
     try{
-      BufferedWriter w = new BufferedWriter(new FileWriter("bootstrap.csv"));
+      BufferedWriter w = new BufferedWriter(new FileWriter("catalog.csv"));
 
       for(Course c: listOfCourses){
         toWrite += (c.getCourseCode());

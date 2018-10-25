@@ -72,7 +72,7 @@ public class Bootstrap{
           string = cs.toString();
         }
         else{
-          System.out.println("Degree Type Not Found");
+          System.out.println(array[0] + ": Degree Type Not Found");
           return;
         }
         //System.out.println(string);
@@ -97,7 +97,7 @@ public class Bootstrap{
     String toWrite = "";
 
     try{
-      BufferedWriter w = new BufferedWriter(new FileWriter("bootstrap.csv", true));
+      BufferedWriter w = new BufferedWriter(new FileWriter("degreeTypes.csv"));
 
       //Write BCG
       toWrite += "BCG";
@@ -118,7 +118,7 @@ public class Bootstrap{
       toWrite += "\n";
 
       //Write SEng
-      toWrite += "SEng,";
+      toWrite += "SEng";
       listOfRequiredCourseCodes = sEng.getRequiredCourses();
       for(Course c : listOfRequiredCourseCodes){
         toWrite += (",");
@@ -128,7 +128,6 @@ public class Bootstrap{
 
       //Write to file
       w.write(toWrite);
-      w.newLine();
       w.close();
     }
     catch(IOException e){
