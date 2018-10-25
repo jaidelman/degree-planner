@@ -9,6 +9,7 @@ public class Course{
   private String status;
   private String semester;
   private ArrayList<Course> preReqList;
+  private String reason; //Required, elective or minor
 
   public Course(){
     code = "N/A";
@@ -17,6 +18,7 @@ public class Course{
     grade = "0";
     status = "Incomplete";
     semester = "N/A";
+    reason = "N/A";
     preReqList = new ArrayList<Course>();
   }
 
@@ -27,7 +29,8 @@ public class Course{
     grade = c.getCourseGrade();
     status = c.getCourseStatus();
     semester = c.getSemesterTaken();
-    preReqList = new ArrayList<Course>();
+    reason = c.getCourseReason();
+    preReqList = c.getPrequisites();
   }
 
   public String getCourseCode(){
@@ -91,7 +94,7 @@ public class Course{
     return grade;
   }
 
-  public void setSemesterTake(String semester){
+  public void setSemesterTaken(String semester){
     this.semester = semester;
   }
 
@@ -99,6 +102,13 @@ public class Course{
     return semester;
   }
 
+  public void setCourseReason(String reason){
+    this.reason = reason;
+  }
+
+  public String getCourseReason(){
+    return reason;
+  }
   public String toString(){
 
     String toReturn;

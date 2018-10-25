@@ -75,7 +75,7 @@ public class Bootstrap{
           System.out.println(array[0] + ": Degree Type Not Found");
           return;
         }
-        //System.out.println(string);
+      //System.out.println(string);
       }
 
       input.close();

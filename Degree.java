@@ -4,6 +4,7 @@ public abstract class Degree{
 
    private String degreeTitle;
    protected CourseCatalog catalog;
+   protected double creditsRequired;
 
    public Degree(){
        degreeTitle = "Generic Degree";

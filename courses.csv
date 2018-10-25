@@ -1,0 +1,24 @@
+CIS*1500,0.5,Programming,
+CIS*2500,0.5,Intermediate Programming,CIS*1500
+CIS*2030,0.5,Micro Computers,CIS*2500:CIS*1500
+CIS*1910,0.5,Discrete Structures in Computing,
+CIS*2430,0.5,Object Oriented Programming,CIS*2500
+CIS*2520,0.5,Data Structures,CIS*2500:CIS*1910
+CIS*2750,0.75,Software Systems Development and Integration,CIS*2430:CIS*2520
+CIS*2910,0.5,Discrete Structures in Computing II,CIS*1500:CIS*1910
+CIS*3530,0.5,Data Base Systems and Concepts,CIS*2520
+CIS*1250,0.5,Software Design I,
+CIS*2250,0.5,Software Design II,CIS*1250:CIS*1500
+CIS*3250,0.5,Software Design III,CIS*2250:CIS*2500
+CIS*3110,0.5,Operating Systems I,CIS*2500:CIS*2030
+CIS*3260,0.5,Software Design IV,CIS*2430:CIS*2750:CIS*3250
+CIS*3750,0.75,System Analysis and Design in Applications,CIS*2750
+CIS*2460,0.5,Modelling of Computer Systems,CIS*2500
+CIS*2750,0.75,Software Engineering,CIS*2750:CIS*3110
+CIS*4150,0.5,Software Reliability and Testing,CIS*3750
+CIS*4250,0.5,Software Design V,CIS*2750:CIS*3260:CIS*3750
+CIS*4300,0.5,Human Computer Interaction,CIS*3110:CIS*3750
+MATH*1200,0.5,Calculus I,
+CIS*3490,0.5,The Analysis and Design of Computer Algorithms,CIS*2910:CIS*2520
+CIS*3150,0.5,Theory of Computation,CIS*2750:CIS*3490
+CIS*4650,0.5,Compilers,CIS*2030:CIS*3110:CIS*3150

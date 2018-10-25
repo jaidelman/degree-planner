@@ -51,7 +51,7 @@ public class PlanOfStudy{
     Course temp = new Course();
 
     temp.setCourseCode(courseCode);
-    temp.setSemesterTake(semester);
+    temp.setSemesterTaken(semester);
 
     listOfCourses.add(temp);
   }
@@ -84,6 +84,32 @@ public class PlanOfStudy{
       }
     }
     return null;
+  }
+
+  public Course getCourse(String courseCode){
+    for(Course c : listOfCourses){
+      if(courseCode.equals(c.getCourseCode())){
+        return c;
+      }
+    }
+    return null;
+  }
+
+  public ArrayList<Course> getListOfCourses(){
+    return listOfCourses;
+  }
+
+  public double viewCompletedCredits(){
+
+    double completedCredits = 0.0;
+
+    for(Course c : getListOfCourses()){
+      if(c.getCourseStatus().equals("Complete")){
+        completedCredits += c.getCourseCredit();
+      }
+    }
+
+    return completedCredits;
   }
 
   public String toString(){
