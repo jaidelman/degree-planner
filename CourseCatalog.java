@@ -138,4 +138,9 @@ public class CourseCatalog{
     return toReturn;
   }
 
+  //Since the only instance variable is static, these will always be equal
+  public boolean isEqual(CourseCatalog a, CourseCatalog b){
+    return true;
+  }
+
 }

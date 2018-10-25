@@ -109,11 +109,34 @@ public class Course{
   public String getCourseReason(){
     return reason;
   }
+
   public String toString(){
 
     String toReturn;
 
     toReturn = code + ": " + title + ", " + credit + " credits, " + status + ", " + grade + "%, " + semester;
     return toReturn;
+  }
+
+  public boolean isEqual(Course a, Course b){
+    if(!(a.getCourseStatus().equals(b.getCourseStatus()))){
+      return false;
+    }
+    else if(!(a.getCourseCode().equals(b.getCourseCode()))){
+      return false;
+    }
+    else if(!(a.getCourseGrade().equals(b.getCourseGrade()))){
+      return false;
+    }
+    else if(!(a.getCourseTitle().equals(b.getCourseTitle()))){
+      return false;
+    }
+    else if(!(a.getCourseCredit() == b.getCourseCredit())){
+      return false;
+    }
+    else if(!(a.getCourseReason().equals(b.getCourseReason()))){
+      return false;
+    }
+    return true;
   }
 }

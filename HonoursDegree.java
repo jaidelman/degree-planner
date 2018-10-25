@@ -15,4 +15,13 @@ public abstract class HonoursDegree extends Degree{
     return creditsRequired - thePlan.viewCompletedCredits();
   }
 
+  public boolean isEqual(HonoursDegree a, HonoursDegree b){
+    if(!(a.getDegreeTitle().equals(b.getDegreeTitle()))){
+      return false;
+    }
+    else if(!(a.getRequiredCourses() == b.getRequiredCourses())){
+      return false;
+    }
+    return true;
+  }
 }

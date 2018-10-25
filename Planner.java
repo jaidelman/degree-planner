@@ -75,36 +75,49 @@ public class Planner{
           markCourseReason(thePlan);
           break;
 
+        //Case Five - Remove Course
         case "5":
           removeCourse(thePlan);
           break;
 
+        //Case Six - Change a grade
         case "6":
           changeGrade(thePlan);
           break;
 
+        //Case Seven - View a list of required courses not in your PoS
         case "7":
           viewRequired(thePlan);
           break;
 
+        //Case 8 - View list of prerequisites for any course
         case "8":
           viewPreReq(thePlan);
           break;
 
+        //Case 9 - View home many credits you've completed
         case "9":
           viewCompletedCredits(thePlan);
           break;
 
+        //Case 10 - View how many credits remaining you have
         case "10":
           viewCreditsRemaining(thePlan);
           break;
 
+        //Case 11 - Determine if you've met the completion requirements
         case "11":
           isCompleted(thePlan);
           break;
 
+        //Case 12 - Save plan of study
         case "12":
           savePlanOfStudy(thePlan);
+          break;
+
+        //Case 13 - Load plan of study
+        case "13":
+          thePlan = loadPlanOfStudy();
           break;
 
         default:
@@ -152,15 +165,16 @@ public class Planner{
 
   }
 
+  //Add course
   public static void addCourse(PlanOfStudy thePlan){
 
     CourseCatalog catalog = new CourseCatalog();
     Scanner input = new Scanner(System.in);
 
-    int choice = 1; //Boolean if they want to add another course
+    String choice = "1"; //Boolean if they want to add another course
     String code, semester, status;
 
-    while(choice != 0){
+    while(!choice.equals("0")){
 
       //Gets courseCode and Semester
       System.out.println("Please enter the course code you'd like to add");
@@ -176,37 +190,45 @@ public class Planner{
 
       //Asks if user wants to enter new course
       System.out.println("Enter 0 to exit, any other integer to add a new course");
-      choice = input.nextInt();
+      choice = input.nextLine();
     }
 
   }
 
+  //Changes reason for taking course
   public static void markCourseReason(PlanOfStudy thePlan){
 
     CourseCatalog catalog = new CourseCatalog();
 
     String code, semester, reason;
-    int choice = 1; //Boolean if they want to mark another course
+    String choice = "1"; //Boolean if they want to mark another course
     Course tempCourse;
 
-    while(choice != 0){
+    //Loops so user can mark multiple courses
+    while(!choice.equals("0")){
 
+      //Gets code and semester, makes temp course
       System.out.println("Please enter the course code of the course you would like to mark");
       code = input.nextLine();
       System.out.println("Please enter the semester of the course you would like to mark");
       semester = input.nextLine();
       tempCourse = thePlan.getCourse(code, semester);
 
+      //Change mark
       if(tempCourse != null){
         System.out.println("Please enter the reason you are taking this course");
         reason = input.nextLine();
         tempCourse.setCourseReason(reason);
       }
 
+      //Prompt for exit
+      System.out.println("Please enter 0 to exit, any other number to mark another course");
+      choice = input.nextLine();
     }
 
   }
 
+  //Removes course from plan
   public static void removeCourse(PlanOfStudy thePlan){
 
     String code, semester;
@@ -219,10 +241,12 @@ public class Planner{
     thePlan.removeCourse(code, semester);
   }
 
+  //Changes grade in PoS
   public static void changeGrade(PlanOfStudy thePlan){
 
     String code, semester, grade;
 
+    //Get code, semester and grade
     System.out.println("Please enter the course code of the course you would like to change");
     code = input.nextLine();
     System.out.println("Please enter the semester of the course you would like to change");
@@ -230,19 +254,22 @@ public class Planner{
     System.out.println("Please enter the new grade");
     grade = input.nextLine();
 
+    //Set grade
     thePlan.setCourseGrade(code, semester, grade);
   }
 
+  //Save PoS
   public static void savePlanOfStudy(PlanOfStudy thePlan){
 
     String toWrite;
 
     try{
+      //Use planNum to increment the file name if a user makes 2 different PoS
       BufferedWriter w = new BufferedWriter(new FileWriter("plan" + planNum + ".csv"));
 
       toWrite = thePlan.toString();
 
-      //Write to file
+      //Write to the toString to the file
       w.write(toWrite);
       w.close();
       System.out.println("Saved to plan" + planNum + ".csv");
@@ -255,6 +282,7 @@ public class Planner{
 
   }
 
+  //View required courses
   public static void viewRequired(PlanOfStudy thePlan){
 
     Degree deg;
@@ -268,13 +296,15 @@ public class Planner{
       deg = thePlan.getDegreeProgram();
     }
 
+    //Loops through all required courses, if it's not in the plan, print it out
     for(Course c : deg.getRequiredCourses()){
-      if(thePlan.getCourse(c.getCourseCode()) == null){
+      if(thePlan.findCourse(c.getCourseCode()) == null){
         System.out.println("NOT TAKEN - " + c.toString());
       }
     }
   }
 
+  //View prerequisites for a required course
   public static void viewPreReq(PlanOfStudy thePlan){
 
     Degree deg;
@@ -290,11 +320,13 @@ public class Planner{
       deg = thePlan.getDegreeProgram();
     }
 
+    //Get course code
     System.out.println("Which course (code) would you like to see the pre-requisites for?");
     code = input.nextLine();
 
+    //Find course, print prereqlist
     for(Course c : deg.getRequiredCourses()){
-      if(thePlan.getCourse(code) != null){
+      if(thePlan.findCourse(code) != null){
 
         preReqList = c.getPrequisites();
 
@@ -307,12 +339,14 @@ public class Planner{
 
   }
 
+  //Views completed credits
   public static double viewCompletedCredits(PlanOfStudy thePlan){
     double completedCredits = thePlan.viewCompletedCredits();
     System.out.println("You have " + completedCredits + " completed credits");
     return completedCredits;
   }
 
+  //Views creditsRemaining
   public static void viewCreditsRemaining(PlanOfStudy thePlan){
 
     Degree deg;
@@ -327,11 +361,46 @@ public class Planner{
       deg = thePlan.getDegreeProgram();
     }
 
+    //Use accessor to find creditsRemaining
     creditsRemaining = deg.numberOfCreditsRemaining(thePlan);
     System.out.println("Remaining Credits: " + creditsRemaining);
   }
 
+  //Checks if a program is completed
   public static void isCompleted(PlanOfStudy thePlan){
-    
+
+    Degree deg = thePlan.getDegreeProgram();
+
+    //Find degree
+    if(thePlan.getDegreeProgram() == null){
+      System.out.println("No degree chosen");
+      return;
+    }
+    else{
+      deg = thePlan.getDegreeProgram();
+    }
+
+    //Check if PoS meet requirements
+    if(deg.meetsRequirements(thePlan)){
+      System.out.println("Degree is completed");
+    }
+    else{
+      System.out.println("Degree is not completed");
+    }
+
+  }
+
+  //Loads plan of study from file
+  public static PlanOfStudy loadPlanOfStudy(){
+
+    String filename;
+    PlanOfStudy toReturn = new PlanOfStudy();
+
+    //Loads, then imports data
+    System.out.println("Please enter the file name to load student transcript");
+    filename = input.nextLine();
+    toReturn.importData(filename);
+
+    return toReturn;
   }
 }

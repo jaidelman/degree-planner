@@ -8,12 +8,37 @@ public class SEng extends HonoursDegree{
     setDegreeTitle("SEng");
   }
 
-  ArrayList<Course> remainingRequiredCourses(PlanOfStudy thePlan){
-    return null;
+  public ArrayList<Course> remainingRequiredCourses(PlanOfStudy thePlan){
+
+    //Store requiredCourses in temp
+    ArrayList<Course> temp = new ArrayList<Course>();
+    for(Course c : requiredCourses){
+      temp.add(c);
+    }
+
+    for(Course c : temp){
+      if(thePlan.findCourse(c.getCourseCode()) != null){
+        if(thePlan.getCourseStatus(c.getCourseCode()).equals("Complete")){
+          temp.remove(c);
+
+        }
+      }
+    }
+
+    return temp;
   }
 
-  boolean meetsRequirements(PlanOfStudy thePlan){
-    return false;
+  public boolean meetsRequirements(PlanOfStudy thePlan){
+    ArrayList<Course> temp = remainingRequiredCourses(thePlan);
+
+    if(temp == null && (thePlan.viewCompletedCredits() >= creditsRequired)){
+      return true;
+    }
+    else{
+      System.out.println(temp.toString());
+      System.out.println((thePlan.viewCompletedCredits() - creditsRequired) + " credits remaining");
+      return false;
+    }
   }
 
   public void setRequiredCourses(ArrayList<String> listOfRequiredCourseCodes){
@@ -45,4 +70,5 @@ public class SEng extends HonoursDegree{
 
     return toReturn;
   }
+
 }

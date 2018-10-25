@@ -16,4 +16,13 @@ public abstract class GeneralDegree extends Degree{
     return creditsRequired - thePlan.viewCompletedCredits();
   }
 
+  public boolean isEqual(GeneralDegree a, GeneralDegree b){
+    if(!(a.getDegreeTitle().equals(b.getDegreeTitle()))){
+      return false;
+    }
+    else if(!(a.getRequiredCourses() == b.getRequiredCourses())){
+      return false;
+    }
+    return true;
+  }
 }

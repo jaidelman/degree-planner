@@ -39,4 +39,25 @@ public class Student{
     return studentNumber;
   }
 
+  public String toString(){
+
+    String toReturn = "";
+
+    toReturn += getFullName();
+    toReturn += ",";
+    toReturn += getStudentNumber();
+
+    return toReturn;
+  }
+
+  public boolean isEqual(Student a, Student b){
+    if(!(a.getFullName().equals(b.getFullName()))){
+      return false;
+    }
+    else if(!(a.getStudentNumber().equals(b.getStudentNumber()))){
+      return false;
+    }
+    return true;
+  }
+
 }
